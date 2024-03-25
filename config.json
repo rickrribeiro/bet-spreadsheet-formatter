@@ -1,0 +1,25 @@
+{
+    "fileName": "games.xlsx",
+    "tables": [
+        {
+            "column": "B",
+            "firstLine": 5,
+            "lastLine": 104
+        },
+        {
+            "column": "H",
+            "firstLine": 5,
+            "lastLine": 104
+        },
+        {
+            "column": "N",
+            "firstLine": 5,
+            "lastLine": 104
+        },
+        {
+            "column": "T",
+            "firstLine": 5,
+            "lastLine": 104
+        }
+    ]
+}
