@@ -18,5 +18,5 @@ def main():
   result = leagueHandler.groupResultsByLeague(tables, data)
 
 
-  spreadsheetService.write(result, 'output.xlsx')
+  spreadsheetService.write(result, f'./data/{config["fileName"].split(".")[0]}_output.xlsx')
 main()
