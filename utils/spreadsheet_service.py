@@ -14,9 +14,12 @@ class SpreadsheetService:
 
         for key, values in data.items():
             for value in values:
-                df_list.append([key, value["units"], value["green"], value["reds"], value["tips"]])
+                if value["green"] == "-":
+                    df_list.append(["SOMA:", f'R$ {value["units"]}', value["green"], value["reds"], value["tips"]])
+                else:
+                    df_list.append([value["date"], key, f'R$ {value["units"]}', value["green"], value["reds"], value["tips"]])
             # Adicionar uma linha em branco
-            df_list.append(["", "", "", "", ""])
-        df = pd.DataFrame(df_list, columns=["key", "units", "green", "reds", "tips"])
+            df_list.append(["","", "", "", "", ""])
+        df = pd.DataFrame(df_list, columns=["date", "key", "units", "green", "reds", "tips"])
 
         df.to_excel(newFilePath, index=False)
