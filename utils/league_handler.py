@@ -15,10 +15,13 @@ class LeagueHandler:
       for line in range(table['firstLine']-2, table['lastLine']-1):
         leagueName = data[column][line]
         if leagueName not in leagues:
-          leagues[leagueName] = []
+          leagues[leagueName] = {
+            'sumUnits': 0,
+            'results': []
+          }
         floatUnit = self.formatUnitTofloat(data[ch.next_letter(column,1)][line])
         print(data[column][1])
-        leagues[leagueName].append({
+        leagues[leagueName]['results'].append({
           'date': str(data[column][1]),
           'units': floatUnit,
           'green': data[ch.next_letter(column,2)][line],
@@ -27,14 +30,8 @@ class LeagueHandler:
         })
     for key in leagues.keys():
       sumUnits = 0
-      leagues[key] = sorted(leagues[key], key=lambda x: x['units'], reverse=True)
-      for i in range(len(leagues[key])):
-        sumUnits += leagues[key][i]['units']
-      leagues[key].append({
-          'units': sumUnits,
-          'green': '-',
-          'reds': '-',
-          'tips': '-'
-        })
-       
-    return leagues
+      for i in range(len(leagues[key]['results'])):
+        sumUnits += leagues[key]['results'][i]['units']
+      leagues[key]['sumUnits'] = sumUnits
+    sortedLeagues = sorted(leagues.items(), key=lambda x: x[1]['sumUnits'], reverse=True)
+    return sortedLeagues

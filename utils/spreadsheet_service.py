@@ -12,13 +12,13 @@ class SpreadsheetService:
     def write(self, data, newFilePath):
         df_list = []
 
-        for key, values in data.items():
-            for value in values:
-                if value["green"] == "-":
-                    df_list.append(["SOMA:", f'R$ {value["units"]}', value["green"], value["reds"], value["tips"]])
-                else:
-                    df_list.append([value["date"], key, f'R$ {value["units"]}', value["green"], value["reds"], value["tips"]])
+        for values in data:
+            print("aaaaa")
+            print(values)
+            for value in values[1]['results']:
+                df_list.append([value["date"], values[0], f'R$ {value["units"]}', value["green"], value["reds"], value["tips"]])
             # Adicionar uma linha em branco
+            df_list.append(["SOMA:", f'R$ {values[1]["sumUnits"]}',"","", ""])
             df_list.append(["","", "", "", "", ""])
         df = pd.DataFrame(df_list, columns=["date", "key", "units", "green", "reds", "tips"])
 
